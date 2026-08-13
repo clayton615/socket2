@@ -224,6 +224,14 @@ impl Domain {
     /// Domain for IPv6 communication, corresponding to `AF_INET6`.
     pub const IPV6: Domain = Domain(sys::AF_INET6);
 
+    #[cfg(all(
+        feature = "all",
+        any(target_arch = "x86_64", target_arch = "s390x"),
+        target_env = "gnu"
+    ))]
+    /// Domain for IUCV socket communication, corresponding to `AF_IUCV`.
+    pub const IUCV: Domain = Domain(sys::AF_IUCV);
+
     /// Domain for Unix socket communication, corresponding to `AF_UNIX`.
     #[cfg(not(target_os = "wasi"))]
     pub const UNIX: Domain = Domain(sys::AF_UNIX);
